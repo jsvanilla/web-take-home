@@ -1,19 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect, useContext} from 'react'
 import "./index.css";
 import TreeNode from './TreeNode';
-import treeData from './data.json'
+import { GlobalStateContext } from '../services/GlobalState';
 
 export default function Tree() {
-  const [data] = useState(treeData)
+  const [state, dispatch] = useContext(GlobalStateContext);
+  
+  useEffect(() => {
+  }, [state])
+  
   return (
-    <div className="tree">
-      <TreeNode {...data}/>
-      <span class="vertical-line"></span>
-      <span class="vertical-line" style={{marginLeft:"2.37rem"}}></span>
-      <span class="vertical-line" style={{marginLeft:"4.74rem"}}></span>
-      <span class="vertical-line" style={{marginLeft:"7.11rem"}}></span>
-      <ExampleTree/>
-    </div>
+      <div className="tree">
+        <TreeNode {...state}/>
+        <span className="vertical-line"></span>
+        <span className="vertical-line" style={{marginLeft:"2.37rem"}}></span>
+        <span className="vertical-line" style={{marginLeft:"4.74rem"}}></span>
+        <span className="vertical-line" style={{marginLeft:"7.11rem"}}></span>
+        <ExampleTree/>
+      </div>
   );
 }
 
