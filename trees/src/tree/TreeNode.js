@@ -4,7 +4,7 @@ import "./index.css";
 const TreeNode = ({ node, children, numberNameprop }) => {
   let numberName = numberNameprop ? numberNameprop : '1'
   return (
-    <div>
+    <div className="node">
       <div>{`${numberName}  ${node}`}</div>
       {children &&
         children.map((node, index) => {

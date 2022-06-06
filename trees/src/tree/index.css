@@ -5,6 +5,11 @@
   font-family: monospace;
 }
 
+.node{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .ident {
   display: flex;
   flex-direction: row;
