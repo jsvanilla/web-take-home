@@ -39,15 +39,15 @@ export default function Tree() {
 function ExampleTree() {
   return (
     <div  style={{marginTop: "6rem"}}>
-      <p>root</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;ant</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;bear</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog</p>
+      <p>1 root</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;1.1 ant</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;1.2 bear</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.1 cat</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.2 dog</p>
       <p>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elephant
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.2.2.1 elephant
       </p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;frog</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;1.3 frog</p>
     </div>
   );
 }
