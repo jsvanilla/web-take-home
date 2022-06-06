@@ -11,3 +11,11 @@
   margin-left: 2.37rem;
   margin-top: 1rem;
 }
+
+.vertical-line{
+  border-left:1px dashed rgb(211, 58, 58);  
+  position: absolute;
+  z-index: 4;
+  min-height: 88vh;
+  margin-top: -16rem;
+}

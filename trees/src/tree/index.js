@@ -25,6 +25,29 @@ export default function Tree() {
   return (
     <div className="tree">
       <TreeNode {...data}/>
+      <span class="vertical-line"></span>
+      <span class="vertical-line" style={{marginLeft:"2.37rem"}}></span>
+      <span class="vertical-line" style={{marginLeft:"4.74rem"}}></span>
+      <span class="vertical-line" style={{marginLeft:"7.11rem"}}></span>
+      <ExampleTree/>
+    </div>
+  );
+}
+
+
+
+function ExampleTree() {
+  return (
+    <div  style={{marginTop: "6rem"}}>
+      <p>root</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;ant</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;bear</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog</p>
+      <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elephant
+      </p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;frog</p>
     </div>
   );
 }
