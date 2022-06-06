@@ -1,27 +1,10 @@
 import React, {useState} from 'react'
 import "./index.css";
 import TreeNode from './TreeNode';
-
+import treeData from './data.json'
 
 export default function Tree() {
-  const [data] = useState({
-    node: 'root',
-    children: [{
-      node: 'ant'
-    },{
-      node: 'bear',
-      children: [{
-        node: 'cat'
-      },{
-        node: 'dog',
-        children: [{
-          node: 'elephant'
-        }]
-      }]
-    },{
-      node: 'frog'
-    }]
-  })
+  const [data] = useState(treeData)
   return (
     <div className="tree">
       <TreeNode {...data}/>
