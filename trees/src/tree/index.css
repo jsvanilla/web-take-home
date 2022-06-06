@@ -1,0 +1,13 @@
+.tree {
+  background-color: #efefef;
+  height: 100%;
+  padding: 10px;
+  font-family: monospace;
+}
+
+.ident {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2.37rem;
+  margin-top: 1rem;
+}
