@@ -5,20 +5,24 @@ import Toggle from "../components/toggle";
 
 const letters = "abcdefghijklmnopqrstuvwxyz"
 
-const TreeNode = ({ node, children, numberNameprop, isLastChildren }) => {
+const TreeNode = ({ node, children, numberNameprop = '1', isLastChildren }) => {
   const [state, dispatch] = useContext(GlobalStateContext);
-  const [toggle, setToggle] = useState(false)
-  let numberName = numberNameprop ? numberNameprop : !toggle ? '1' : letters['0']
-  let nodeRender = `${node.substring(0,1)}${numberName.replace(/\d/g,'')}${node.substring(1,node.length)}`
-  const inputName =  `name${numberNameprop}`
+  let numberNameRender = () => {
+    if(!state.toggle){
+      return numberNameprop 
+    }
+      return numberNameprop.split('.').map(el => letters[el-1]).join('.')
+  } 
+  
+  let nodeRender = `${node.substring(0,1)}${numberNameRender().replace(/[\d\w]/gm,'')}${node.substring(1,node.length)}`
 
   const registerInData = (e) => {
-    if(e.code === "Enter" && e.target.value.length > 3){
+    if(e.code === "Enter" && e.target.value.length > 2){
       dispatch({
         type: 'CREATE_NODE',
         payload: {
           text: e.target.value, 
-          nested:numberName
+          nested:numberNameprop
         }
       })
       e.target.value = ""
@@ -26,14 +30,12 @@ const TreeNode = ({ node, children, numberNameprop, isLastChildren }) => {
   }
 
   const registerInNestedData = (e) => {
-    if(e.code === "Enter" && e.target.value.length > 3){
-      console.log('codigo')
-      console.log(`${numberName}.0`)
+    if(e.code === "Enter" && e.target.value.length > 2){
       dispatch({
         type: 'CREATE_NODE',
         payload: {
           text: e.target.value, 
-          nested:`${numberName}.0`
+          nested:`${numberNameprop}.0`
         }
       })
       e.target.value = ""
@@ -41,33 +43,38 @@ const TreeNode = ({ node, children, numberNameprop, isLastChildren }) => {
   }
 
   const deleteNode = (e) => {
+    e.stopPropagation();
     dispatch({
       type: 'DELETE_NODE',
       payload: {
-        nested:numberName
+        nested:numberNameprop
       }
     })
   }
 
-  const handleToggle = (event) => {
+  const handleToggle = (e) => {
+    e.stopPropagation();
     setTimeout(()=>{
-      setToggle(!toggle)
-      event.stopPropagation();
-    },600)
-    
+      dispatch({
+        type: 'TOGGLE_SWITCH',
+        payload: !state.toggle
+      })
+    },600)     
   }
 
-
+  useEffect(() => {
+  }, [JSON.stringify(state)])
+  
   
   return (
     <div className="node">
-      {!numberNameprop && (<div onClick={handleToggle}><Toggle/></div>)}
-      <div className="nodeText">{`${numberName}  ${nodeRender}`} {numberNameprop && (<div onClick={deleteNode} className="delete"> ❌</div>)} </div>
-      {isLastChildren && <input type="text" name={`name${numberName}1`} style={{width:"8rem"}} onKeyPress={registerInData}/>}
-      {isLastChildren && <input type="text" name={`name${numberName}2`} style={{width:"8rem", marginLeft:"3rem"}} onKeyPress={registerInNestedData}/>}
+      {numberNameprop === "1" && (<div onClick={handleToggle}><Toggle/></div>)}
+      <div className="nodeText">{`${numberNameRender()}  ${nodeRender}`} {numberNameprop != "1" && (<div onClick={deleteNode} className="delete"> ❌</div>)} </div>
+      {(isLastChildren || node === "root" && children.length === 0) && <input type="text" name={`name${numberNameprop}1`} style={{width:"8rem"}} onKeyPress={registerInData}/>}
+      {(isLastChildren || node === "root" && children.length === 0) && <input type="text" name={`name${numberNameprop}2`} style={{width:"8rem", marginLeft:"3rem"}} onKeyPress={registerInNestedData}/>}
       {children &&
         children.map((node, index) => {
-          node.numberNameprop = `${numberName}.${!toggle ? index+1 : letters[index]}`
+          node.numberNameprop = `${numberNameprop}.${index+1}`
           node.isLastChildren = index === children.length-1
           return(
             <div key={`${node.node}${node.numberNameprop}`} className="ident">

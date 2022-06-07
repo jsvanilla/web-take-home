@@ -22,18 +22,21 @@ const reducer = (state, action) => {
       let withNewNode = editTree(newTree)
       return {...newTree}
     case 'DELETE_NODE':
-      let elementsSearch = action.payload.nested.replace(/(\.\d)$/gm,'').split('.')
+      let elementsSearch = action.payload.nested.replace(/^(\d\.)/gm,'').split('.').map(el => parseInt(el)) 
       let treeReference = {...state}
       const deleteNode = (node) => {
         if(elementsSearch.length === 1){
-          node.children.splice((elementsSearch[0]-1),1)
+          node.children.splice(elementsSearch[0]-1,1)
         } else {
-          elementsSearch.shift()
-          deleteNode(node.children[(elementsSearch[0]-1)])
+          let index = elementsSearch.shift()
+          deleteNode(node.children[index-1])
         }
       }
       let deletedNode = deleteNode(treeReference)
       return {...treeReference}
+    case 'TOGGLE_SWITCH':
+      let stateCopy = {...state, toggle:action.payload}
+      return stateCopy
     default:
       return state
   }

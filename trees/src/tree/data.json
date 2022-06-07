@@ -1,5 +1,6 @@
 {
   "node": "root",
+  "toggle": false,
   "children": [{
     "node": "ant"
   },{
