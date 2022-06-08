@@ -56,10 +56,3 @@
   color: var(--blue-color);
   margin-right: 1rem;
 }
-
-.spinposition {
-  padding-top: 50%;
-  padding-bottom: 50%;
-  padding-left: 50%;
-  padding-right: 50%;
-}

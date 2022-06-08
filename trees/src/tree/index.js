@@ -12,7 +12,7 @@ export default function Tree() {
   
   return (
     <>
-      {JSON.stringify(state) === '{}' ? (<Spinner className="spinposition"/>) : (
+      {JSON.stringify(state) === '{}' ? (<Spinner/>) : (
         <div className="tree">
           <TreeNode {...state}/>
           <span className="vertical-line"></span>
