@@ -23,6 +23,7 @@ export const GlobalStateContextProvider = props => {
           }
         }
         let withNewNode = editTree(newTree)
+        editApiTree({...newTree})
         return {...newTree}
       case 'DELETE_NODE':
         let elementsSearch = action.payload.nested.replace(/^(\d\.)/gm,'').split('.').map(el => parseInt(el)) 
@@ -36,6 +37,7 @@ export const GlobalStateContextProvider = props => {
           }
         }
         let deletedNode = deleteNode(treeReference)
+        editApiTree({...treeReference})
         return {...treeReference}
       case 'TOGGLE_SWITCH':
         let stateCopy = {...state, toggle:action.payload}
@@ -50,13 +52,13 @@ export const GlobalStateContextProvider = props => {
   const [state, dispatch] = useReducer(reducer, tree)
 
   useEffect(() => {
-    if(JSON.stringify(tree)){
+    if(JSON.stringify(tree) !== "{}" && JSON.stringify(tree) != JSON.stringify(state)){
       dispatch({
         type:'SET_STATE',
-        payload:tree
+        payload: JSON.stringify(state) === '{}' ? tree : state
       })
     }
-  }, [JSON.stringify(tree),treeData])
+  }, [JSON.stringify(tree)])
   
   
   return (
