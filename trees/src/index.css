@@ -1,3 +1,7 @@
+:root {
+  --blue-color: #2196F3;
+}
+
 * {
   box-sizing: border-box;
 }

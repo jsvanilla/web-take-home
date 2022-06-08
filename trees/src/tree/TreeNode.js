@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import "./index.css";
 import { GlobalStateContext } from '../services/GlobalState';
-import Toggle from "../components/toggle";
+import Toggle from "../components/toggle/index";
 
 const letters = "abcdefghijklmnopqrstuvwxyz"
 
@@ -13,8 +13,7 @@ const TreeNode = ({ node, children, numberNameprop = '1', isLastChildren }) => {
     }
       return numberNameprop.split('.').map(el => letters[el-1]).join('.')
   } 
-  
-  let nodeRender = `${node.substring(0,1)}${numberNameRender().replace(/[\d\w]/gm,'')}${node.substring(1,node.length)}`
+  const [nodeRender, setNodeRender] = useState(node ? `${node.substring(0,1)}${numberNameRender().replace(/[\d\w]/gm,'')}${node.substring(1,node.length)}` : '')
 
   const registerInData = (e) => {
     if(e.code === "Enter" && e.target.value.length > 2){
@@ -63,13 +62,14 @@ const TreeNode = ({ node, children, numberNameprop = '1', isLastChildren }) => {
   }
 
   useEffect(() => {
-  }, [JSON.stringify(state)])
+    setNodeRender(node ? `${node.substring(0,1)}${numberNameRender().replace(/[\d\w]/gm,'')}${node.substring(1,node.length)}` : '')
+  },[JSON.stringify(state)])
   
   
   return (
     <div className="node">
       {numberNameprop === "1" && (<div onClick={handleToggle}><Toggle/></div>)}
-      <div className="nodeText">{`${numberNameRender()}  ${nodeRender}`} {numberNameprop != "1" && (<div onClick={deleteNode} className="delete"> ❌</div>)} </div>
+      <div className="nodeText"><strong className="classificationid">{`${numberNameRender()} `}</strong>{` ${nodeRender}`} {numberNameprop !== "1" && (<div onClick={deleteNode} className="delete"> ❌</div>)} </div>
       {(isLastChildren || node === "root" && children.length === 0) && <input type="text" name={`name${numberNameprop}1`} style={{width:"8rem"}} onKeyPress={registerInData}/>}
       {(isLastChildren || node === "root" && children.length === 0) && <input type="text" name={`name${numberNameprop}2`} style={{width:"8rem", marginLeft:"3rem"}} onKeyPress={registerInNestedData}/>}
       {children &&

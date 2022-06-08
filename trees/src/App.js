@@ -233,7 +233,7 @@ export default function App() {
               </div>
             </Col>
             <Col sm={6}>
-              <Tree />
+              <Tree/>
             </Col>
           </Row>
         </Container>

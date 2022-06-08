@@ -1,19 +1,26 @@
 {
   "node": "root",
   "toggle": false,
+  "isEditing": false,
   "children": [{
-    "node": "ant"
+    "node": "ant",
+    "isEditing": false
   },{
     "node": "bear",
+    "isEditing": false,
     "children": [{
-      "node": "cat"
+      "node": "cat",
+      "isEditing": false
     },{
       "node": "dog",
+      "isEditing": false,
       "children": [{
-        "node": "elephant"
+        "node": "elephant",
+        "isEditing": false
       }]
     }]
   },{
-    "node": "frog"
+    "node": "frog",
+    "isEditing": false
   }]
 }

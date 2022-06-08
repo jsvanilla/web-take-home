@@ -1,5 +1,5 @@
 import React from "react"
-import "./toggle.css"
+import "./index.css"
 
 export default function Toggle() {
   return (
